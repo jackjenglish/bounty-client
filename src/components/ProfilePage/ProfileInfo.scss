@@ -1,0 +1,81 @@
+.header {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.headerLogo {
+  width: 150px;
+  height: 150px;
+  background: rgba(28, 155, 95, 0.9);
+  text-align: center;
+  border-radius: 50%;
+}
+
+.profoContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.profileImg {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  border: 1px solid #eee;
+  object-fit: cover;
+}
+.logoPlaceholder {
+}
+
+.infoContainer {
+  padding: 0.5rem 1rem;
+}
+
+.headerTitle {
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 0.25rem;
+}
+
+.headerDetail {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  text-align: center;
+}
+
+.headerContacts {
+  display: flex;
+  justify-content: center;
+}
+
+.contact {
+  padding: 0 0.5rem;
+}
+
+@media (min-width: 768px) {
+}
+
+.link {
+}
+
+.link:hover {
+  color: rgba(28, 155, 95, 0.9);
+}
+
+@media (min-width: 768px) {
+  .profoContainer {
+    width: auto;
+    display: block;
+  }
+  .header {
+    justify-content: flex-start;
+  }
+  .headerDetail {
+    text-align: start;
+  }
+  .headerContacts {
+    justify-content: flex-start;
+  }
+}

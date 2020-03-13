@@ -1,0 +1,53 @@
+.root {
+  height: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.activeCategory {
+  border-left: 4px solid #1c9b5f;
+  padding-left: 0.25rem;
+}
+
+.value {
+  border: 1px solid transparent;
+  line-height: 1.2;
+  color: #37352f;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.editable {
+  border: 1px dashed gray;
+}
+
+.categoryNameContainer {
+  cursor: pointer;
+}
+
+.textInput {
+  line-height: 1.2;
+  font-family: Roboto, sans-serif;
+  border: 1px dashed gray;
+  font-size: 24px;
+  width: 100%;
+  color: #37352f;
+  font-weight: 500;
+}
+
+.icon {
+  color: yellow;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 0.25rem;
+  color: #bababa;
+  cursor: pointer;
+}
+
+.icon:hover {
+  color: #444444;
+}
+
+.lightFont {
+  font-weight: normal;
+}

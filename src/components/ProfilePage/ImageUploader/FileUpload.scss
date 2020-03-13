@@ -1,0 +1,98 @@
+.uploader {
+  margin-bottom: 0;
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  border-radius: 2px;
+  width: 150px;
+  height: 150px;
+  background: #37352f;
+  border-radius: 50%;
+
+  .fileInput {
+    display: none;
+  }
+
+  & img,
+  & .icon {
+    pointer-events: none;
+  }
+
+  &,
+  .icon {
+    transition: all 100ms ease-in;
+  }
+
+  .icon {
+    color: #eee;
+    color: rgba(0, 0, 0, 0.2);
+    font-size: 5em;
+  }
+
+  .img {
+    left: 50%;
+    opacity: 0;
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+    top: 50%;
+    transition: all 300ms ease-in;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+
+    border-radius: 50%;
+    border: 1px solid #eee;
+    object-fit: cover;
+
+    &.loaded {
+      opacity: 1;
+    }
+  }
+
+  .dishImg {
+    border-radius: 0;
+  }
+}
+
+.fileInput {
+  display: none;
+}
+
+.uploadImgLabelContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.uploadImgLabel {
+  color: #fff;
+  font-weight: 500;
+}
+
+.uploadPromptOnHover {
+  opacity: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+
+.uploadPromptOnHover:hover {
+  opacity: 1;
+}
+
+.noRadius {
+  border-radius: 0;
+}
+
+.dishUploader {
+  width: 120px;
+  height: 80px;
+  border-radius: 0;
+}

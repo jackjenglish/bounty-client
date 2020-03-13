@@ -1,0 +1,118 @@
+.topBar {
+  width: 100%;
+  background: #fff; /*#1C9B5F;*/
+  border-bottom: 2px solid #eee;
+  z-index: 4000;
+  height: 50px;
+  box-sizing: content-box;
+  position: fixed;
+}
+
+.rowContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #339966;
+}
+
+.icon {
+  font-size: 32px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  color: #339966;
+  //border-radius: 50%;
+  //border: 1px solid #339966;
+  margin-right: 0.5rem;
+}
+
+.profileIcon {
+  position: absolute;
+  right: 0;
+}
+
+.logoContainer {
+  padding: 0.5rem;
+  height: 50px;
+}
+
+.logo {
+  height: 100%;
+  display: block;
+}
+
+.nav {
+  display: flex;
+}
+
+.navLink {
+  color: #37352f;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  transition: all 0.15s ease-in-out;
+  font-weight: 500;
+}
+
+.navLink:hover {
+  color: #37352f;
+  border-bottom: 2px solid #cdeefe;
+}
+
+.activeLink {
+  border-bottom: 2px solid #cdeefe;
+}
+
+.navText {
+  margin-top: 10px;
+  white-space: nowrap;
+}
+
+.logout {
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+
+.logoutText {
+  padding: 0.25rem 0.5rem;
+  background: rgba(28, 155, 95, 0.9);
+  color: #fff;
+  font-weight: 500;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.logoutText:hover {
+  background: rgb(28, 155, 95);
+}
+
+.searchContainer {
+  padding: 0.25rem 1.5rem;
+  flex-grow: 1;
+}
+
+.actionButton {
+  display: inline-block;
+  background: #1c9b5f;
+  border-radius: 2px;
+  margin-top: 0.25rem;
+  color: #fff;
+  padding: 0.5rem;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.cancelButton {
+  background: #e57373;
+}
+
+.updateBanner {
+  display: flex;
+  align-items: center;
+}

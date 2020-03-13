@@ -1,0 +1,22 @@
+export default {
+  darkA: '#37352F',
+  softGray: '#FEFEFE',
+  gray222: '#222222',
+  grayMedium: '#212121',
+  gray20: 'rgba(0,0,0,0.2)',
+  gray60: 'rgba(0,0,0,0.6)',
+  darkUnderline: 'rgba(34, 34, 34, 0.2)',
+  grayQuora: '#949494',
+  blueA: '#0099FF',
+  gold: '#F5C26B',
+  lightBlue: '#CDEEFE',
+  red: 'hsl(0, 94%, 60%)',
+  darkRed: '#8E2828',
+  lightRed: 'FBB7B6',
+  lightGreen: '#9CE1B6',
+  darkGreen: '#116D34',
+  white: '#FFFFFF',
+  darkBlue: '#003E6B',
+  darkMain: '#212529',
+  headerDark: '#303030'
+};

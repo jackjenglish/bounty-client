@@ -1,0 +1,30 @@
+.checkItem {
+  padding: 0.25rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.checkFirstLayout {
+  justify-content: flex-start;
+}
+.checkItemMobile {
+  width: 50%;
+}
+
+.checkItemMobile:nth-child(odd) {
+  border-right: 1px solid #eee;
+}
+
+.checkInput {
+  display: flex;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 2px;
+  border: 1px solid #303030;
+}
+
+.checkLabel {
+  margin-right: 0.5rem;
+}
