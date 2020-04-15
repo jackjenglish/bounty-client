@@ -3,6 +3,7 @@ import update from 'immutability-helper';
 
 const initialState = {
   posts: [],
+  pageNumber: 1,
   loading: true
 };
 

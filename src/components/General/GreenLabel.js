@@ -5,7 +5,7 @@ const GreenLabel = styled.div`
   font-size: 11px;
   color: rgb(17, 109, 52);
   background: #9ce1b6;
-  border-radius: 4px;
+  border-radius: 2px;
   padding: 2px 4px;
 `;
 

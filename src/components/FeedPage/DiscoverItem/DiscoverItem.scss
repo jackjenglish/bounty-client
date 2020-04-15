@@ -1,0 +1,39 @@
+.root {
+}
+
+.pane {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.title {
+  color: inherit;
+  font-weight: 500;
+}
+
+.pane {
+  cursor: pointer;
+  width: 140px;
+  height: 100px;
+  background: #160722;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*color: #a756ef;*/
+  color: #fff;
+  text-align: center;
+  padding: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.18s ease-in-out;
+  &:hover {
+    box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+  background: linear-gradient(rgb(247, 220, 88), rgb(254, 161, 22));
+}

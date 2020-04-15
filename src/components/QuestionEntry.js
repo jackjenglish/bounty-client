@@ -42,7 +42,6 @@ const BottomBar = styled.div`
   display: flex;
   align-items: center;
   font-size: 14px;
-  padding-top: 8px;
 `;
 
 const Value = styled.div`
@@ -58,8 +57,12 @@ const Author = styled.div`
 `;
 
 const Topic = styled.div`
-  color: #9d9d9d;
+  display: inline-block;
+  color: #686d72;
   font-size: 12px;
+  padding: 2px 4px;
+  background: #eee;
+  border-radius: 2px;
 `;
 
 const ScoreContainer = styled.div`
@@ -120,18 +123,15 @@ class QuestionEntry extends Component {
       acceptedReply,
       commentCount,
       title,
-      topic,
+      topics,
       value,
       slugId,
-      description,
       author
     } = this.props.data;
     const { name } = author;
-    console.log('post', this.props.data);
 
     return (
       <QuestionEntryContainer>
-        {acceptedReply && <GreenLabel className="mb-1">Awarded</GreenLabel>}
         <div className="d-flex">
           <div className="pr-3 d-flex flex-column align-items-center">
             {this.renderScoring(this.props.data)}
@@ -143,7 +143,7 @@ class QuestionEntry extends Component {
                 <StyledLink onClick={this.onClick} to={`/post/${slugId}`}>
                   <Title>{title}</Title>
                 </StyledLink>
-                <div className="my-1">
+                <div className="">
                   <StyledLink
                     underline
                     onClick={this.onClick}
@@ -153,14 +153,27 @@ class QuestionEntry extends Component {
                     <Author>{name}</Author>
                   </StyledLink>
                 </div>
-                <Description>{description}</Description>
               </div>
             </FlexContainer>
-            <BottomBar>
-              <Topic>{topic}</Topic>
+            <BottomBar className="mt-1">
+              <div
+                style={{ fontSize: '11px', fontWeight: '600' }}
+                className="mr-2"
+              >
+                {commentCount ? commentCount : 0} Comments
+              </div>
+              {acceptedReply && (
+                <GreenLabel className="ml-1">Awarded</GreenLabel>
+              )}
 
-              {commentCount && (
-                <div className="ml-2">{commentCount} Comments</div>
+              {topics.length > 0 && (
+                <div>
+                  {topics.map(topic => (
+                    <Topic className="ml-1" key={topic._id}>
+                      {topic.name}
+                    </Topic>
+                  ))}
+                </div>
               )}
             </BottomBar>
           </Content>

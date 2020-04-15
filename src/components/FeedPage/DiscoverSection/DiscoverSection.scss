@@ -1,0 +1,70 @@
+.discover {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+}
+
+.heading {
+  padding: 0.25rem 0;
+  font-size: 1.2rem;
+  color: #444;
+  font-weight: bold;
+}
+
+.sliderContainer {
+  position: relative;
+}
+
+.displayRow {
+  position: relative;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.displayRow::-webkit-scrollbar {
+  /* WebKit */
+  width: 0;
+  height: 0;
+}
+
+.scrollContainer {
+  //overflow: hidden;
+}
+
+.paneDark {
+  background: #444;
+  color: #fff;
+}
+
+.paneGreen {
+  background: #1c9b5f;
+  color: #fff;
+}
+
+.paneLight {
+  background: #f6f6f6;
+  color: #444;
+}
+
+.slideButton {
+  width: 120px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slideLeft {
+  left: 0;
+  z-index: 10;
+}
+
+.rightButtonIcon {
+}
+
+.slideButton:hover .buttonIcon {
+  transition: transform 0.25s;
+  transform: scale(1.15);
+}

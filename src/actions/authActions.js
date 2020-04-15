@@ -47,9 +47,51 @@ export function fetchUserBalance() {
   };
 }
 
+// export const validateCreateAccount = simpleAction(VALIDATE_CREATE_ACCOUNT);
+// export const signupFailure = simpleAction(VALIDATE_CREATE_ACCOUNT);
+
+export function submitSignup(signupForm) {
+  return async (dispatch, getState) => {
+    // dispatch({ type: SIGNUP_REQUEST });
+
+    const { name, email, password, confirmPassword } = signupForm;
+    console.log('signing up');
+
+    try {
+      const response = await axios.post('/api/signup', {
+        name,
+        email,
+        password
+      });
+
+      console.log(
+        'submit signup response:\n',
+        'status ',
+        response.status,
+        '\ndata: ',
+        response.data
+      );
+
+      const authData = response.data;
+
+      localStorage.setItem('authData', JSON.stringify(authData));
+
+      dispatch({
+        type: actions.LOGIN_SUCCESS,
+        payload: authData
+      });
+      // dispatch(push('/menu'));
+    } catch (e) {
+      console.log('signup submit fail', e);
+      //return dispatch(loginFailure('Something went wrong'))
+    }
+  };
+}
+
 export function logout() {
   return dispatch => {
     clearLocalAuthData();
+
     dispatch({ type: actions.LOGOUT });
   };
 }

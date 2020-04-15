@@ -10,6 +10,9 @@ import {
   POST_REPORT_REASONS,
   COMMENT_REPORT_REASONS
 } from '../PostPage/PostReportModal';
+import Button from '../General/Button';
+import Interweave from 'interweave';
+import markupStyles from '../PostPage/Markup.css';
 
 const Content = styled.div``;
 
@@ -53,6 +56,23 @@ const Label = styled.span`
   font-weight: 600;
 `;
 
+const Description = styled.div`
+  color: #131313;
+  font-size: 12px;
+`;
+
+const REPORT_ACTION_LABELS = {
+  'subject-removed': 'The subject of this report was removed',
+  'report-disregard': 'No action was taken as a result of this report',
+  'award-bounty': 'This posts bounty has been manually awarded by a moderator'
+};
+
+const REPORT_ACTIONS = {
+  SUBJECT_REMOVED: 'subject-removed',
+  REPORT_DISREGARD: 'report-disregard',
+  AWARD_BOUNTY: 'award-bounty'
+};
+
 class ReportDetail extends Component {
   constructor(props) {
     super(props);
@@ -64,12 +84,30 @@ class ReportDetail extends Component {
   }
 
   renderSubject() {
-    const { subject, subjectAuthor } = this.props.report;
+    const { type, subject, subjectAuthor } = this.props.report;
+
+    let subjectContent;
+    if (type === 'post') {
+      subjectContent = (
+        <React.Fragment>
+          <Title className="mb-1">{subject.title}</Title>
+          <Description className="html-content">
+            <Interweave content={subject.description} />
+          </Description>
+        </React.Fragment>
+      );
+    } else {
+      subjectContent = (
+        <Description className="html-content">
+          <Interweave content={subject.text} />
+        </Description>
+      );
+    }
 
     return (
       <SubjectWrapper>
         <StyledLink onClick={this.onClick} to={`/post/${subject.slugId}`}>
-          <Title>{subject.title}</Title>
+          {subjectContent}
         </StyledLink>
         <div className="my-1">
           <StyledLink
@@ -86,11 +124,14 @@ class ReportDetail extends Component {
   }
 
   getReason() {
-    const { reason } = this.props.report;
+    const { type, reason } = this.props.report;
+    let reasons = POST_REPORT_REASONS;
+    if (type === 'comment') reasons = COMMENT_REPORT_REASONS;
+
     let reasonLabel = '';
-    for (let i in POST_REPORT_REASONS) {
-      if (POST_REPORT_REASONS[i].value === reason) {
-        reasonLabel = POST_REPORT_REASONS[i].label;
+    for (let i in reasons) {
+      if (reasons[i].value === reason) {
+        reasonLabel = reasons[i].label;
       }
     }
     return (
@@ -99,8 +140,60 @@ class ReportDetail extends Component {
       </div>
     );
   }
+
+  renderReportOutcome(actionTaken) {
+    return (
+      <div>
+        <GreenLabel className="mb-1">Resolved</GreenLabel>
+        <span style={{ fontWeight: 600, fontSize: '14px' }}>
+          {' '}
+          - {REPORT_ACTION_LABELS[actionTaken]}
+        </span>
+      </div>
+    );
+  }
+
+  renderReportActions() {
+    const { type } = this.props.report;
+    return (
+      <div>
+        <Button
+          onClick={() =>
+            this.props.takeReportAction(REPORT_ACTIONS.SUBJECT_REMOVED)
+          }
+          size="small"
+          type="delete"
+          className="mr-2"
+        >
+          {type === 'post' ? 'Remove Post' : 'Remove Comment'}
+        </Button>
+        <Button
+          className="mr-2"
+          onClick={() =>
+            this.props.takeReportAction(REPORT_ACTIONS.REPORT_DISREGARD)
+          }
+          size="small"
+        >
+          Disregard Report
+        </Button>
+        {type === 'post' && (
+          <Button
+            onClick={() =>
+              this.props.takeReportAction(REPORT_ACTIONS.AWARD_BOUNTY)
+            }
+            size="small"
+            type="yellow"
+          >
+            Bounty Awarded
+          </Button>
+        )}
+      </div>
+    );
+  }
+
   render() {
     const {
+      actionTaken,
       reason,
       text,
       reportAuthor,
@@ -110,14 +203,15 @@ class ReportDetail extends Component {
 
     return (
       <div>
-        {/* {resolved && <GreenLabel className="mb-1">Resolved</GreenLabel>} */}
+        {actionTaken && this.renderReportOutcome(actionTaken)}
         <div className="d-flex">
           <Content>
-            <div>
+            <div className="mb-2">
               <ReportText>{this.getReason()}</ReportText>
               <ReportText>
                 <Label>Text: </Label> {text}
               </ReportText>
+
               <ReportText>
                 <Label>Submitted by: </Label>
                 <StyledLink
@@ -130,6 +224,7 @@ class ReportDetail extends Component {
                 </StyledLink>
               </ReportText>
             </div>
+            {!actionTaken && this.renderReportActions()}
             <div className="my-2">{this.renderSubject()}</div>
           </Content>
         </div>

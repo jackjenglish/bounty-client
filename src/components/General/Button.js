@@ -39,6 +39,16 @@ function applySizing(style, size) {
 function applyTypeStyling(style, type) {
   style = Object.assign({}, style);
   switch (type) {
+    case 'delete': {
+      style.background = Colors.lightRed;
+      style.color = Colors.darkRed;
+      break;
+    }
+    case 'yellow': {
+      style.background = '#DE911D';
+      style.color = '#780A0A';
+      break;
+    }
     case 'secondary': {
       style.background = Colors.darkUnderline;
       style.color = Colors.darkA;

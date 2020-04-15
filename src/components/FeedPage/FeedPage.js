@@ -8,6 +8,7 @@ import { setPostDetail } from '../../actions/feedActions';
 import { getPosts } from '../../actions/feedActions';
 import { upvotePost, clearUpvotePost } from '../../actions/postActions';
 import ActionBar from './ActionBar';
+import DiscoverSection from './DiscoverSection/DiscoverSection';
 
 const FeedPageContainer = styled.div`
   max-width: 960px;
@@ -53,6 +54,28 @@ const TileD = styled(Tile)`
   background: linear-gradient(#ff0099, #493240);
 `;
 
+const itemsList = [
+  'Computer Science',
+  'Economics',
+  'Technology',
+  'Music',
+  'Books',
+  'Architecture',
+  'Physics',
+  'General',
+  'Personal',
+  'Random',
+  'Astronomy',
+  'JavaScript',
+  'Android',
+  'Java',
+  'Python',
+  'Databases',
+  'Algorithms',
+  'Logic',
+  'Electrical Engineering'
+];
+
 class FeedPage extends Component {
   constructor(props) {
     super(props);
@@ -61,6 +84,23 @@ class FeedPage extends Component {
 
   componentDidMount() {
     this.props.getPosts();
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll() {
+    var scrollValue = document.documentElement.scrollTop;
+    var documentHeight = document.body.scrollHeight;
+    var windowHeight = window.innerHeight;
+    if (scrollValue >= documentHeight - windowHeight - 250) {
+      // console.log('LOAD MORE');
+      // if (!this.state.loading) {
+      //   this.loadItems(this.props.category);
+      // }
+    }
   }
 
   onClickPostQuestion() {
@@ -81,6 +121,7 @@ class FeedPage extends Component {
     if (loading) {
       return <FeedPageContainer>Loading...</FeedPageContainer>;
     }
+
     const postItems = posts.map(post => {
       return (
         <QuestionEntry
@@ -104,11 +145,17 @@ class FeedPage extends Component {
             )}
             {postItems}
           </PostsContainer>
-          <SideBar className="col-sm-0 col-md-4">
-            <Tile className="mb-2">Computer Science</Tile>
+          <SideBar className="d-flex col-sm-0 col-md-4">
+            <div style={{}}>
+              <DiscoverSection
+                items={itemsList}
+                // onItemClick={item => this.itemClick(item, 'popular')}
+              />
+            </div>
+            {/* <Tile className="mb-2">Computer Science</Tile>
             <TileB className="mb-2">Computer Science</TileB>
             <TileC className="mb-2">Computer Science</TileC>
-            <TileD className="mb-2">Computer Science</TileD>
+            <TileD className="mb-2">Computer Science</TileD> */}
           </SideBar>
         </div>
       </FeedPageContainer>

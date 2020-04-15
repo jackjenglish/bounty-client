@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import AnswerInput from '../PostPage/AnswerInput';
 import Editor from '../PostPage/Editor/Editor';
 import Colors from '../styles/Colors';
+import Select from 'react-select';
 
 const Container = styled.div`
   background: #ffffff;
@@ -42,8 +42,23 @@ class PostEditor extends Component {
     this.props.updateComposeField(name, value);
   }
 
+  formatTopics() {
+    const { topics } = this.props;
+    return topics.map(topic => ({
+      label: topic.name,
+      value: topic._id
+    }));
+  }
+
   render() {
-    const { title, value, description, user } = this.props;
+    const {
+      title,
+      value,
+      description,
+      user,
+      topics,
+      selectedTopics
+    } = this.props;
 
     return (
       <Container>
@@ -63,6 +78,19 @@ class PostEditor extends Component {
             onChange={htmlState =>
               this.props.updateComposeField('description', htmlState)
             }
+          />
+        </InputContainer>
+
+        <InputContainer>
+          <Label>Add Topic Labels</Label>
+          <Select
+            className="mb-2"
+            value={selectedTopics}
+            onChange={topics =>
+              this.props.updateComposeField('selectedTopics', topics)
+            }
+            options={this.formatTopics(topics)}
+            isMulti
           />
         </InputContainer>
 

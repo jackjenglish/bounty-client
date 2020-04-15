@@ -1,0 +1,64 @@
+.root {
+	color:#444;
+  max-width: 450px;
+  margin-top: 1rem;
+}
+
+.formContainer {
+}
+
+.container {
+  display: flex;
+	width: 500px;
+	flex-direction: column;
+}
+
+.cta {
+
+}
+
+.buttonContainer {
+  display: flex;
+}
+
+.signUpButton {
+  color:#339966;
+  border:0;
+  background: #F6F6F6;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+.signUpButton:hover {
+  background: rgba(221, 221, 221, 0.8);
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+}
+
+.tab {
+  padding: 0.5rem;
+  background: #fff;
+  color: rgba(68,68,68,0.6);
+  font-weight: bold;
+  border-bottom: 2px solid #f9f9f9;
+  cursor: pointer;
+  flex-grow: 1;
+  text-align: center;
+  transition: all 0.15s ease-in-out;
+}
+
+.tab:hover {
+  color: #444;
+}
+
+.activeTab {
+  color: #444;
+  border-bottom: 2px solid #1C9B5F;
+}

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import cx from 'classnames';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../components/General/Button';
 import { logout } from '../actions/authActions';
@@ -33,6 +32,17 @@ const Title = styled.div`
   font-weight: 600;
 `;
 
+const Link = styled(StyledLink)`
+  padding: 7px 14px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  &:hover {
+    color: #fff;
+    background: #444;
+  }
+`;
+
 const LinkContainer = styled.div`
   padding: 7px 14px;
   height: 100%;
@@ -40,6 +50,7 @@ const LinkContainer = styled.div`
   align-items: center;
   &:hover {
     color: #646464;
+    background: #444;
   }
 `;
 
@@ -47,6 +58,12 @@ class TopBar extends Component {
   constructor(props) {
     super(props);
     this.onClickLogin = this.onClickLogin.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  logout() {
+    this.props.logout();
+    this.props.history.push('/login');
   }
 
   onClickLogin() {
@@ -112,28 +129,25 @@ class TopBar extends Component {
             </StyledLink>
           </div>
 
-          <LinkContainer>
-            <StyledLink type="light" to="/">
-              Feed
-            </StyledLink>
-          </LinkContainer>
+          <Link type="light" to="/">
+            Feed
+          </Link>
           {loggedIn && (
-            <LinkContainer>
-              <StyledLink type="light" to={`/profile/${user.slugId}`}>
-                Profile
-              </StyledLink>
-            </LinkContainer>
+            <Link type="light" to={`/profile/${user.slugId}`}>
+              Profile
+            </Link>
           )}
           {loggedIn && (
-            <LinkContainer>
-              <StyledLink type="light" to={`/reports`}>
-                Reports
-              </StyledLink>
-            </LinkContainer>
+            <Link type="light" to="/reports">
+              Reports
+            </Link>
           )}
-          <div>
+          <Link type="light" to="/about">
+            About
+          </Link>
+          <div className="ml-2">
             {loggedIn ? (
-              <Button size="small" onClick={this.props.logout}>
+              <Button size="small" onClick={this.logout}>
                 Logout
               </Button>
             ) : (

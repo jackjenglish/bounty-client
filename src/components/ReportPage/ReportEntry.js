@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CheckIcon from '../General/CheckIcon';
 import GreenLabel from '../General/GreenLabel';
 import PostReportModal from '../PostPage/PostReportModal';
+import Interweave from 'interweave';
+import markupStyles from '../PostPage/Markup.css';
 
 const Container = styled.div`
   background: #fff;
@@ -59,52 +61,49 @@ const Title = styled.div`
   text-decoration: none;
 `;
 
-class PostReport extends Component {
+class ReportEntry extends Component {
   constructor(props) {
     super(props);
     this.onClick = this.onClick.bind(this);
   }
 
   onClick() {
-    // this.props.onClickEntry();
-    console.log('clack');
     this.props.onClick();
   }
 
   renderSubject() {
-    const { subject, subjectAuthor } = this.props.report;
-
-    return (
-      <SubjectWrapper>
-        {/* <StyledLink to={`/post/${subject.slugId}`}> */}
-        <Title>{subject.title}</Title>
-        {/* </StyledLink> */}
-        <div className="my-1">
-          {/* <StyledLink
-            underline
-            onClick={this.onClick}
-            to={`/profile/${subjectAuthor.slugId}`}
-            style={{ textDecorationColor: '#9d9d9d' }}
-          > */}
-          <Author>{subjectAuthor.name}</Author>
-          {/* </StyledLink> */}
+    const { type, subject, subjectAuthor } = this.props.report;
+    let subjectContent = <Title>{subject.title}</Title>;
+    if (type === 'comment') {
+      subjectContent = (
+        <div
+          ref={this.content}
+          style={{
+            maxHeight: '75px',
+            overflow: 'hidden'
+          }}
+          className="html-content"
+        >
+          <Interweave content={subject.text} />
+          <div id="gradient" />
         </div>
-      </SubjectWrapper>
-    );
+      );
+    }
+    return <SubjectWrapper>{subjectContent}</SubjectWrapper>;
   }
 
   render() {
     const {
       reason,
+      actionTaken,
       text,
       reportAuthor,
       subjectAuthor,
       subject
     } = this.props.report;
-    console.log('active', this.props.active);
+
     return (
       <Container onClick={this.onClick} selected={this.props.selected}>
-        {/* {resolved && <GreenLabel className="mb-1">Resolved</GreenLabel>} */}
         <div className="d-flex">
           <Content>
             <FlexContainer>
@@ -115,6 +114,9 @@ class PostReport extends Component {
             </FlexContainer>
             <BottomBar>
               <Author>{reportAuthor.name}</Author>
+              {actionTaken && (
+                <GreenLabel className="ml-2">Resolved</GreenLabel>
+              )}
             </BottomBar>
           </Content>
         </div>
@@ -123,4 +125,4 @@ class PostReport extends Component {
   }
 }
 
-export default withRouter(PostReport);
+export default withRouter(ReportEntry);

@@ -3,7 +3,11 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
-import { updateComposeField, submitPost } from '../actions/newPostActions';
+import {
+  updateComposeField,
+  submitPost,
+  fetchTopics
+} from '../actions/newPostActions';
 import { fetchUserBalance } from '../actions/authActions';
 import PostEditor from '../components/NewPost/PostEditor';
 import Button from '../components/General/Button';
@@ -44,6 +48,7 @@ class NewPostPageContainer extends Component {
 
   componentDidMount() {
     this.props.fetchUserBalance();
+    this.props.fetchTopics();
   }
 
   onClickPostQuestion() {
@@ -59,7 +64,9 @@ class NewPostPageContainer extends Component {
       updateComposeField,
       submitPost,
       postCreated,
-      createdId
+      createdId,
+      topics,
+      selectedTopics
     } = this.props;
 
     if (postCreated) {
@@ -70,13 +77,14 @@ class NewPostPageContainer extends Component {
       <PageContainer>
         <EditorWrapper>
           <H2>New Post</H2>
-
           <PostEditor
             user={user}
             updateComposeField={updateComposeField}
             title={title}
             value={value}
             description={description}
+            selectedTopics={selectedTopics}
+            topics={topics}
           />
           <div style={{ marginTop: '0.75em' }}>
             <Button onClick={submitPost}>Submit</Button>
@@ -116,6 +124,8 @@ function mapStateToProps({ compose, auth }) {
     title: compose.title,
     description: compose.description,
     value: compose.value,
+    topics: compose.topics,
+    selectedTopics: compose.selectedTopics,
     postCreated: compose.postCreated,
     createdId: compose.createdId
   };
@@ -124,6 +134,7 @@ function mapStateToProps({ compose, auth }) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
+      fetchTopics,
       fetchUserBalance,
       updateComposeField,
       submitPost

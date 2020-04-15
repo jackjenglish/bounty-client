@@ -7,8 +7,10 @@ import ReportPage from './components/ReportPage/ReportPage';
 import PostPageContainer from './containers/PostPageContainer';
 import CreatePostPage from './containers/CreatePostPage';
 import styles from './App.scss';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import LoginPageContainer from './containers/LoginPageContainer';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import AboutPage from './containers/AboutPage';
+import AboutPage2 from './components/AboutPage/AboutPage';
+import LoginPage from './components/LoginPage/LoginPage';
 import ProfilePageContainer from './containers/ProfilePageContainer';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -47,7 +49,9 @@ class App extends Component {
                 <Route path="/post" component={CreatePostPage} />
                 <Route path="/reports" component={ReportPage} />
                 <Route exact path="/" component={FeedPage} />
-                <Route exact path="/login" component={LoginPageContainer} />
+                {/* <Route exact path="/about" component={AboutPage} /> */}
+                <Route exact path="/about" component={AboutPage2} />
+                <Route exact path="/login" component={LoginPage} />
               </Switch>
             </div>
           </div>

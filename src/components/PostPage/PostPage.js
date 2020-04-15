@@ -27,7 +27,6 @@ const Title = styled.div`
   font-size: 24px;
   font-weight: 600;
   color: #303030;
-  cursor: pointer;
   text-decoration: none;
   line-height: 1.4;
 `;
@@ -76,6 +75,15 @@ const Description = styled.div`
 
 const CommentsWrapper = styled.div``;
 
+const PostRemovedBar = styled.div`
+  background: ${Colors.darkRed};
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+  width: 100%;
+  padding: 0.5em;
+  text-align: center;
+`;
 class PostPage extends Component {
   constructor(props) {
     super(props);
@@ -124,6 +132,25 @@ class PostPage extends Component {
     );
   }
 
+  renderRemovedPostUI(postData) {
+    return (
+      <PostPageContainer>
+        <PostRemovedBar>
+          This post has been removed by moderators
+        </PostRemovedBar>
+        <PostContainer style={{ opacity: 0.4 }}>
+          <div>
+            <Topic>{postData.topic}</Topic>
+            <Title>{postData.title}</Title>
+            <BottomBar className="my-1">
+              <Value>${postData.value.toFixed(2)}</Value>
+            </BottomBar>
+          </div>
+        </PostContainer>
+      </PostPageContainer>
+    );
+  }
+
   render() {
     const {
       postData,
@@ -140,10 +167,23 @@ class PostPage extends Component {
       submitCommentReport,
       user
     } = this.props;
-    const { topic, title, value, author, comments, acceptedReply } = postData;
 
+    const {
+      topic,
+      title,
+      value,
+      author,
+      comments,
+      acceptedReply,
+      removed
+    } = postData;
+
+    if (!loading && removed) {
+      return this.renderRemovedPostUI(postData);
+    }
     return (
       <PostPageContainer>
+        {removed && <div>POST REMOVED</div>}
         {!loading && (
           <PostContainer>
             <div>

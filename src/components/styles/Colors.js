@@ -12,7 +12,7 @@ export default {
   lightBlue: '#CDEEFE',
   red: 'hsl(0, 94%, 60%)',
   darkRed: '#8E2828',
-  lightRed: 'FBB7B6',
+  lightRed: '#FBB7B6',
   lightGreen: '#9CE1B6',
   darkGreen: '#116D34',
   white: '#FFFFFF',

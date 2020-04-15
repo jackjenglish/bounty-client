@@ -12,8 +12,8 @@ export const updateComposeField = (field, value) => {
 
 export const submitPost = () => {
   return async (dispatch, getState) => {
-    const { title, description, value } = getState().compose;
-
+    const { title, description, value, selectedTopics } = getState().compose;
+    const topicIds = selectedTopics.map(topic => topic.value);
     dispatch({ type: actions.SUBMIT_POST_REQUEST });
     try {
       const response = await axios.post(
@@ -21,7 +21,8 @@ export const submitPost = () => {
         {
           title,
           description,
-          value: Number(value)
+          value: Number(value),
+          topics: topicIds
         },
         { headers: jwtHeader() }
       );
@@ -36,15 +37,15 @@ export const submitPost = () => {
   };
 };
 
-// export function fetchPostData(slugId) {
-//   return async (dispatch, getState) => {
-//     try {
-//       const { data } = await axios.get(`/api/post/${slugId}`);
+export function fetchTopics() {
+  return async dispatch => {
+    try {
+      const { data } = await axios.get('/api/topics');
 
-//       return dispatch({
-//         type: actions.POST_DATA_RECEIVED,
-//         payload: data
-//       });
-//     } catch (e) {}
-//   };
-// }
+      return dispatch({
+        type: actions.TOPICS_RECEIVED,
+        payload: data
+      });
+    } catch (e) {}
+  };
+}
