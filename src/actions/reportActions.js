@@ -25,13 +25,6 @@ export function removePost(report) {
   return async (dispatch, getState) => {
     try {
       console.log('remove post', report);
-      // const [
-      //   { data: commentReports },
-      //   { data: postReports }
-      // ] = await Promise.all([
-      //   axios.get('/api/comment-reports', { headers: jwtHeader() }),
-      //   axios.get('/api/post-reports', { headers: jwtHeader() })
-      // ]);
 
       return dispatch({
         type: actions.POST_REMOVED,

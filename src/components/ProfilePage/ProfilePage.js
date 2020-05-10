@@ -18,7 +18,7 @@ const ContentWrapper = styled.div`
   border-radius: 4px;
 `;
 
-const Tab = styled(StyledLink)`
+export const Tab = styled(StyledLink)`
   color: #37352f;
   font-weight: 500;
   font-size: 1em;
@@ -75,10 +75,10 @@ class ProfilePage extends Component {
       return this.renderLoadingState();
     }
 
-    console.log('profile', this.props);
+    // console.log('profile', this.props);
 
     const { email, name, slugId, posts, comments } = this.props.profile;
-    const { match, location, fieldsUpdating } = this.props;
+    const { match, fieldsUpdating } = this.props;
 
     return (
       <PageContainer>

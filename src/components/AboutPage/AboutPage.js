@@ -21,43 +21,6 @@ class AboutPage extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  getCustomerItem(count, isVisible) {
-    const items = [];
-    for (let i = 0; i < count; i += 1) {
-      items.push(
-        <div
-          className={cx(
-            styles.customerItemContainer,
-            'col-12 col-sm-6 col-md-4'
-          )}
-        >
-          <div className={cx(styles.visualContainer)}>
-            <div
-              className={cx(
-                styles.square,
-                { [styles.toAnimate]: i % 2 === 1 },
-                { [styles.rotateAnimation]: i % 2 === 1 && isVisible }
-              )}
-            >
-              <div className={styles.cornerDark} />
-              <div className={styles.cornerLight} />
-              <div className={styles.cornerLight} />
-              <div className={styles.cornerDark} />
-            </div>
-          </div>
-
-          <div className={cx(styles.custCopy)}>
-            <div className={styles.custText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </div>
-          </div>
-        </div>
-      );
-    }
-    return items;
-  }
-
   triggerAnimation(animation, isVisible) {
     if (this.state[animation] || !isVisible) return;
     this.setState({ [animation]: true });
@@ -114,7 +77,7 @@ class AboutPage extends Component {
     );
 
     return (
-      <div className={styles.root}>
+      <div style={{ marginTop: '-24px' }} className={styles.root}>
         <section className={cx(styles.section, styles.darkSection)}>
           <div className={cx('container-fluid', styles.content)}>
             <div
@@ -129,20 +92,17 @@ class AboutPage extends Component {
                   styles.phoneContainer
                 )}
               >
-                <div style={{ fontSize: '48px' }}>$</div>
-                {/* <img className={styles.phone} src="/static/phone.png" /> */}
+                <div style={{ fontSize: '84px' }}>$</div>
               </div>
 
               <div className={cx(styles.copy, 'col')}>
                 <div className={cx(styles.headerText, 'mb-1')}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Bounty allows you to offer monetary rewards for your
+                  questions.
                 </div>
                 <div className={styles.subText}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  Receive quality and timely responses to your problems and
+                  queries by offering an incentive to users to help you.
                 </div>
               </div>
             </div>
@@ -151,192 +111,39 @@ class AboutPage extends Component {
 
         <section className={cx(styles.section, styles.whiteSection)}>
           <div className={cx('container-fluid', styles.content)}>
-            <div className={styles.heading}>
-              Benefits from a user perspective
-            </div>
+            <div className={styles.heading}>Site Rules</div>
 
             <div className={styles.detailContainer}>
-              <VisibilitySensor
-                delayedCall
-                partialVisibility
-                onChange={isVisible =>
-                  this.triggerAnimation('ringSquareAnimation', isVisible)
-                }
-              >
-                <div
-                  className={cx(
-                    styles.visualContainer,
-                    'col-12 col-sm-3 mb-2 mb-sm-0',
-                    styles.ringSquare,
-                    {
-                      [styles.ringSquareAnimation]: this.state
-                        .ringSquareAnimation
-                    }
-                  )}
-                >
-                  {ringSquare}
-                </div>
-              </VisibilitySensor>
               <div className={cx(styles.copy, 'col')}>
                 <div className={styles.mainText}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Rules on posting questions
                 </div>
                 <div className={styles.subText}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  Your post should clearly describe what it is you are looking
+                  for. Your post should be relevant to the topic selected and
+                  not contain inappropriate or hateful content. In your
+                  description detail the type of answer which you will award the
+                  bounty to. Users may report you if you fail to award the
+                  bounty when a quality answer has been provided. This possibly
+                  lead to account suspension.
                 </div>
               </div>
             </div>
 
             <div className={styles.detailContainer}>
-              <div
-                className={cx(
-                  styles.copy,
-                  'col',
-                  'order-1 order-sm-0',
-                  styles.copyAnimationInitial,
-                  { [styles.copyAnimation]: this.state.copy2 }
-                )}
-              >
-                <div className={styles.mainText}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </div>
-                <div className={styles.subText}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-              </div>
-
-              <VisibilitySensor
-                delayedCall
-                partialVisibility
-                onChange={isVisible =>
-                  this.triggerAnimation('ringSquareAnimation2', isVisible)
-                }
-              >
-                <div
-                  className={cx(
-                    styles.visualContainer,
-                    'col-12 col-sm-3 mb-2 mb-sm-0',
-                    styles.ringSquareRight,
-                    {
-                      [styles.ringSquareAnimationRight]: this.state
-                        .ringSquareAnimation2
-                    }
-                  )}
-                >
-                  {ringSquare}
-                </div>
-              </VisibilitySensor>
-            </div>
-
-            <div className={styles.detailContainer}>
-              <VisibilitySensor
-                delayedCall
-                partialVisibility
-                onChange={isVisible =>
-                  this.triggerAnimation('ringSquareAnimation3', isVisible)
-                }
-              >
-                <div
-                  className={cx(
-                    styles.visualContainer,
-                    'col-12 col-sm-3 mb-2 mb-sm-0',
-                    styles.ringSquare,
-                    {
-                      [styles.ringSquareAnimation]: this.state
-                        .ringSquareAnimation3
-                    }
-                  )}
-                >
-                  {ringSquare}
-                </div>
-              </VisibilitySensor>
               <div className={cx(styles.copy, 'col')}>
                 <div className={styles.mainText}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Rules on responding to questions
                 </div>
                 <div className={styles.subText}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  Responses must make a meaningful effort to respond to the
+                  question. Responses must be on topic. Low effort responses are
+                  not permitted. Any abusive behaviour contained in comments is
+                  not permitted. If you encounter a comment violating these
+                  rules, please file a report against the comment by clicking on
+                  the report icon.
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section className={cx(styles.section, styles.darkSection)}>
-          <div className={cx('container-fluid', styles.content)}>
-            <VisibilitySensor delayedCall onChange={this.customerItemsVisible}>
-              <div className={styles.heading}>
-                Benefits from a customer perspective
-              </div>
-            </VisibilitySensor>
-
-            <div className={styles.customerItems}>
-              {this.getCustomerItem(6, this.state.customerItemsVisible)}
-            </div>
-          </div>
-        </section>
-
-        <section className={cx(styles.section, styles.whiteSection)}>
-          <div className={cx('container-fluid', styles.content)}>
-            <div className={styles.heading}>Contact Us</div>
-            <form onSubmit={this.handleSubmit}>
-              <div className={styles.formContainer}>
-                {state.emailError && (
-                  <div className={styles.error}>Enter a valid email</div>
-                )}
-                <div className={styles.inputRow}>
-                  <input
-                    className={styles.inputForm}
-                    placeholder="Email"
-                    onChange={evt => this.setState({ email: evt.target.value })}
-                    value={state.email}
-                    name="email"
-                    type="text"
-                  />
-                </div>
-                {state.messageError && (
-                  <div className={styles.error}>Write a message!</div>
-                )}
-                <div className={styles.inputRow}>
-                  <textarea
-                    className={styles.inputForm}
-                    placeholder="Get in touch"
-                    onChange={evt =>
-                      this.setState({ message: evt.target.value })
-                    }
-                    value={state.message}
-                    rows="4"
-                  />
-                </div>
-
-                <div className={styles.submitContainer}>
-                  <input
-                    type="submit"
-                    className={styles.button}
-                    onClick={this.props.submitLogin}
-                    value="Submit"
-                  />
-                </div>
-              </div>
-            </form>
-            <div
-              className={cx(styles.success, {
-                [styles.showSuccess]: state.submitSuccess
-              })}
-            >
-              Thanks for getting in touch!
             </div>
           </div>
         </section>
@@ -347,14 +154,13 @@ class AboutPage extends Component {
             <div className={styles.detailContainer}>
               <div className={cx(styles.copy, 'col')}>
                 <div className={styles.mainText}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua?
+                  How do I win the bounties for posts?
                 </div>
                 <div className={styles.subText}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  Simply respond to questions with a quality and correct answer,
+                  providing the post author with what they are looking for. The
+                  post author will award the bounty to the response which best
+                  answers a question
                 </div>
               </div>
             </div>
@@ -362,14 +168,15 @@ class AboutPage extends Component {
             <div className={styles.detailContainer}>
               <div className={cx(styles.copy, 'col')}>
                 <div className={styles.mainText}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua?
+                  What if a user fails to award the bounty when a quality answer
+                  is given?
                 </div>
                 <div className={styles.subText}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  If a user is withholding their bounty without justification
+                  you can file a report against them. Look for the report icon
+                  on their post, select the appropriate reason and provide and
+                  explanation of why they are failing to award the bounty. Our
+                  moderators will review the report and make a decision.
                 </div>
               </div>
             </div>
@@ -377,14 +184,12 @@ class AboutPage extends Component {
             <div className={styles.detailContainer}>
               <div className={cx(styles.copy, 'col')}>
                 <div className={styles.mainText}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua?
+                  Can I take back a bounty after rewarding it if I later find
+                  the accepted answer lacking?
                 </div>
                 <div className={styles.subText}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  No. In order to avoid fraudulent behaviour, awarding a bounty
+                  is final.
                 </div>
               </div>
             </div>
@@ -392,14 +197,36 @@ class AboutPage extends Component {
             <div className={styles.detailContainer}>
               <div className={cx(styles.copy, 'col')}>
                 <div className={styles.mainText}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua?
+                  How do I add to my account balance?
                 </div>
                 <div className={styles.subText}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  Adding to your account balance is done on the profile page.
+                  Click the option to add to your balance and select the amount.
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.detailContainer}>
+              <div className={cx(styles.copy, 'col')}>
+                <div className={styles.mainText}>
+                  How do I change my profile information?
+                </div>
+                <div className={styles.subText}>
+                  When logged in, click on the profile tab. To edit your name,
+                  click on the pen icon next to your name. To edit your
+                  credentials and employment information, hover over them and an
+                  edit button will appear.
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.detailContainer}>
+              <div className={cx(styles.copy, 'col')}>
+                <div className={styles.mainText}>Is my profile public?</div>
+                <div className={styles.subText}>
+                  Yes. All profile information is visible to other users. This
+                  is to communicate your expertise and credentials and to build
+                  trust between users.
                 </div>
               </div>
             </div>

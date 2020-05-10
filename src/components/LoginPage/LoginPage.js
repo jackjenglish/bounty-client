@@ -72,11 +72,7 @@ class LoginPage extends Component {
           </div>
         </div>
         {state.activeTab === 'login' ? (
-          <LoginForm
-            submitLogin={this.props.submitLogin}
-            // failedLogin={this.props.failedLogin}
-            // error={props.error}
-          />
+          <LoginForm submitLogin={this.props.submitLogin} />
         ) : (
           <SignUpForm />
         )}

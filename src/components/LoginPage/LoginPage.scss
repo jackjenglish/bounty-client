@@ -1,5 +1,5 @@
 .root {
-	color:#444;
+  color: #444;
   max-width: 450px;
   margin-top: 1rem;
 }
@@ -9,12 +9,11 @@
 
 .container {
   display: flex;
-	width: 500px;
-	flex-direction: column;
+  width: 500px;
+  flex-direction: column;
 }
 
 .cta {
-
 }
 
 .buttonContainer {
@@ -22,9 +21,9 @@
 }
 
 .signUpButton {
-  color:#339966;
-  border:0;
-  background: #F6F6F6;
+  color: #339966;
+  border: 0;
+  background: #f6f6f6;
   padding: 0.5rem;
   font-size: 1rem;
   font-weight: bold;
@@ -45,7 +44,7 @@
 .tab {
   padding: 0.5rem;
   background: #fff;
-  color: rgba(68,68,68,0.6);
+  color: rgba(68, 68, 68, 0.6);
   font-weight: bold;
   border-bottom: 2px solid #f9f9f9;
   cursor: pointer;
@@ -60,5 +59,5 @@
 
 .activeTab {
   color: #444;
-  border-bottom: 2px solid #1C9B5F;
+  border-bottom: 2px solid hsl(205, 100%, 21%);
 }

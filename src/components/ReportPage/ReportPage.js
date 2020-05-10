@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
-import {
-  getReports,
-  removePost,
-  takeReportAction
-} from '../../actions/reportActions';
 import StyledLink from '../General/StyledLink';
 import ReportEntry from './ReportEntry';
 import ReportDetail from './ReportDetail';
@@ -25,7 +18,7 @@ const DetailContainer = styled.div`
   overflow-y: scroll;
 `;
 
-const Tab = styled(StyledLink)`
+export const Tab = styled(StyledLink)`
   color: #37352f;
   font-weight: 600;
   font-size: 1em;
@@ -223,24 +216,4 @@ class ReportPage extends Component {
   }
 }
 
-function mapStateToProps({ reports, auth }) {
-  return {
-    commentReports: reports.commentReports,
-    postReports: reports.postReports,
-    loading: reports.loading,
-    loggedIn: auth.loggedIn,
-    user: auth.user
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    { takeReportAction, getReports, removePost },
-    dispatch
-  );
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ReportPage);
+export default ReportPage;

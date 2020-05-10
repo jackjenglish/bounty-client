@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
-import {
-  updateComposeField,
-  submitPost,
-  fetchTopics
-} from '../actions/newPostActions';
-import { fetchUserBalance } from '../actions/authActions';
-import PostEditor from '../components/NewPost/PostEditor';
-import Button from '../components/General/Button';
-import H2 from '../components/General/H2';
+import PostEditor from './PostEditor';
+import Button from '../General/Button';
+import H2 from '../General/H2';
 
 const PageContainer = styled.div`
   max-width: 1075px;
@@ -40,7 +32,7 @@ const Label = styled.div`
   font-size: 1em;
 `;
 
-class NewPostPageContainer extends Component {
+class NewPostPage extends Component {
   constructor(props) {
     super(props);
     this.onClickPostQuestion = this.onClickPostQuestion.bind(this);
@@ -68,7 +60,7 @@ class NewPostPageContainer extends Component {
       topics,
       selectedTopics
     } = this.props;
-
+    console.log('post', this.props);
     if (postCreated) {
       return <Redirect to={`/post/${createdId}`} />;
     }
@@ -92,17 +84,22 @@ class NewPostPageContainer extends Component {
         </EditorWrapper>
         <SideBarWrapper>
           <SideBar>
+            <Label>Rules</Label>
             <ul style={{ paddingLeft: '20px', marginBottom: '0rem' }}>
               <li>
                 Your post should clearly describe what it is you are looking
                 for.
               </li>
               <li>
+                Your post should be on topic and not contain inappropriate or
+                hateful content.
+              </li>
+              <li>
                 In your description detail the type of answer which you will
                 award the bounty to.
               </li>
             </ul>
-            <Label>Rules</Label>
+
             <ul style={{ paddingLeft: '20px', marginBottom: '0rem' }}>
               <li>
                 Users may report you if you fail to award the bounty when a
@@ -117,33 +114,4 @@ class NewPostPageContainer extends Component {
   }
 }
 
-function mapStateToProps({ compose, auth }) {
-  return {
-    loggedIn: auth.loggedIn,
-    user: auth.user,
-    title: compose.title,
-    description: compose.description,
-    value: compose.value,
-    topics: compose.topics,
-    selectedTopics: compose.selectedTopics,
-    postCreated: compose.postCreated,
-    createdId: compose.createdId
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    {
-      fetchTopics,
-      fetchUserBalance,
-      updateComposeField,
-      submitPost
-    },
-    dispatch
-  );
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NewPostPageContainer);
+export default NewPostPage;

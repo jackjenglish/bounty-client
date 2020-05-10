@@ -73,6 +73,7 @@ class DiscoverSection extends Component {
             title={item}
             key={item}
             style={itemStyle}
+            active={this.props.activeItem === item}
             itemSize={this.state.itemSize}
           />
         </div>

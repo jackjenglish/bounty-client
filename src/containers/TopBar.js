@@ -10,7 +10,6 @@ import { withRouter } from 'react-router-dom';
 import StyledLink from '../components/General/StyledLink';
 import FeedbackBar from '../components/FeedbackBar';
 import styles from '../css/TopBar.scss';
-import Colors from '../components/styles/Colors';
 
 const TopBarContainer = styled.div`
   height: 48px;
@@ -39,17 +38,6 @@ const Link = styled(StyledLink)`
   align-items: center;
   &:hover {
     color: #fff;
-    background: #444;
-  }
-`;
-
-const LinkContainer = styled.div`
-  padding: 7px 14px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  &:hover {
-    color: #646464;
     background: #444;
   }
 `;
@@ -110,7 +98,7 @@ class TopBar extends Component {
 
   render() {
     const { clearFeedbackBar, loggedIn, user, feedback } = this.props;
-
+    console.log('user', user);
     return (
       <TopBarContainer>
         {feedback.showFeedbackBar && (
@@ -137,7 +125,7 @@ class TopBar extends Component {
               Profile
             </Link>
           )}
-          {loggedIn && (
+          {loggedIn && user.userType === 'moderator' && (
             <Link type="light" to="/reports">
               Reports
             </Link>
@@ -163,6 +151,7 @@ class TopBar extends Component {
 }
 
 function mapStateToProps({ auth, feedback }) {
+  console.log('auth', auth);
   return {
     loggedIn: auth.loggedIn,
     user: auth.user,

@@ -7,6 +7,7 @@ const initialState = initializeAuthState();
 const auth = (state = initialState, { type, payload }) => {
   switch (type) {
     case actions.LOGIN_SUCCESS: {
+      console.log('login success');
       return update(state, {
         loggedIn: { $set: true },
         user: { $set: payload.user },
@@ -17,7 +18,6 @@ const auth = (state = initialState, { type, payload }) => {
       });
     }
     case actions.USER_BALANCE_RECEIVED: {
-      console.log('user balance', payload.balance);
       return update(state, {
         user: {
           balance: { $set: payload.balance }

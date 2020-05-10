@@ -82,7 +82,7 @@ class PostEditor extends Component {
         </InputContainer>
 
         <InputContainer>
-          <Label>Add Topic Labels</Label>
+          <Label>Add Topics</Label>
           <Select
             className="mb-2"
             value={selectedTopics}

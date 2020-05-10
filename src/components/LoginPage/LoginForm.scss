@@ -6,16 +6,16 @@
 
 .button {
   color: #fff;
-  background: #1C9B5F;
+  background: hsl(205, 100%, 21%);
   padding: 0.5rem 0.25rem;
   border: none;
   border-radius: 5px;
   margin-right: 0.75rem;
   flex-grow: 1;
   flex-basis: 0;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
@@ -27,22 +27,22 @@
   padding: 0.25rem;
   border-radius: 50%;
   background-color: #ffffff;
-  border: 1px solid #1C9B5F;
+  border: 1px solid #1c9b5f;
   margin-left: 0.25rem;
   margin-right: 0.25rem;
 }
 
 .icon {
-  font-size: 24px; 
+  font-size: 24px;
   cursor: pointer;
-  color: #1C9B5F;
+  color: #1c9b5f;
 }
 
 .title {
   text-align: center;
   font-weight: bold;
   font-size: 24px;
-  margin-bottom: 1.5rem;  
+  margin-bottom: 1.5rem;
 }
 
 .inputRow {
@@ -58,23 +58,23 @@
 
 .inputForm {
   width: 100%;
-  border:none;
+  border: none;
   background: transparent;
   font-size: 1rem;
   padding-left: 5px;
 }
 
 .footerControls {
-	display: flex;
-	padding: 1rem;
-	//position: fixed;
-	width: 100%;
-	bottom: 0;
-	background: #f6f6f6;
+  display: flex;
+  padding: 1rem;
+  //position: fixed;
+  width: 100%;
+  bottom: 0;
+  background: #f6f6f6;
 }
 
 .forgotPassword {
-  color: #1C9B5F;
+  color: #1c9b5f;
 }
 
 .error {

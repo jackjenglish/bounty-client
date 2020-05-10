@@ -20,10 +20,15 @@ class DiscoverItem extends Component {
       paneStyle.width = `120px`;
       paneStyle.height = `100px`;
     }
-
+    if (props.active) console.log('active', props.title);
     return (
       <div className="mb-2" key={props.title}>
-        <div className={cx(styles.pane, props.paneClass)} style={paneStyle}>
+        <div
+          className={cx(styles.pane, props.paneClass, {
+            [styles.active]: props.active
+          })}
+          style={paneStyle}
+        >
           <div className={styles.title}>{props.title}</div>
         </div>
       </div>

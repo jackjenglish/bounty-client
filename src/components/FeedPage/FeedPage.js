@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import QuestionEntry from '../QuestionEntry';
-import styles from './FeedPage.scss';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { setPostDetail } from '../../actions/feedActions';
-import { getPosts } from '../../actions/feedActions';
-import { upvotePost, clearUpvotePost } from '../../actions/postActions';
-import ActionBar from './ActionBar';
 import DiscoverSection from './DiscoverSection/DiscoverSection';
+import Button from '../General/Button';
+import H2 from '../General/H2';
 
 const FeedPageContainer = styled.div`
   max-width: 960px;
@@ -43,15 +38,11 @@ const Tile = styled.div`
   background: linear-gradient(rgb(247, 220, 88), rgb(254, 161, 22));
 `;
 
-const TileB = styled(Tile)`
-  background: linear-gradient(#a756ef, #160722);
-`;
-const TileC = styled(Tile)`
-  background: linear-gradient(#2193b0, #6dd5ed);
-`;
-
-const TileD = styled(Tile)`
-  background: linear-gradient(#ff0099, #493240);
+const Bar = styled.div`
+  max-width: 760px;
+  margin-bottom: 0.5em;
+  display: flex;
+  align-items: center;
 `;
 
 const itemsList = [
@@ -80,31 +71,34 @@ class FeedPage extends Component {
   constructor(props) {
     super(props);
     this.onClickPostQuestion = this.onClickPostQuestion.bind(this);
+    this.selectTopic = this.selectTopic.bind(this);
+    this.state = { filterTopic: null };
   }
 
   componentDidMount() {
     this.props.getPosts();
-    window.addEventListener('scroll', this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  }
-
-  handleScroll() {
-    var scrollValue = document.documentElement.scrollTop;
-    var documentHeight = document.body.scrollHeight;
-    var windowHeight = window.innerHeight;
-    if (scrollValue >= documentHeight - windowHeight - 250) {
-      // console.log('LOAD MORE');
-      // if (!this.state.loading) {
-      //   this.loadItems(this.props.category);
-      // }
-    }
   }
 
   onClickPostQuestion() {
     this.props.history.push('post');
+  }
+
+  filterPosts(posts) {
+    if (this.state.filterTopic) {
+      return posts.filter(post => {
+        const { topics } = post;
+        if (!topics || topics.length < 1) return false;
+        return (
+          topics.filter(topic => topic.name === this.state.filterTopic).length >
+          0
+        );
+      });
+    }
+    return posts;
+  }
+
+  selectTopic(topic) {
+    this.setState({ filterTopic: topic });
   }
 
   render() {
@@ -122,7 +116,8 @@ class FeedPage extends Component {
       return <FeedPageContainer>Loading...</FeedPageContainer>;
     }
 
-    const postItems = posts.map(post => {
+    const filteredPosts = this.filterPosts(posts);
+    const postItems = filteredPosts.map(post => {
       return (
         <QuestionEntry
           data={post}
@@ -138,24 +133,36 @@ class FeedPage extends Component {
         <div className="row">
           <PostsContainer className="col-sm-12 col-md-8">
             {loggedIn && (
-              <ActionBar
-                user={user}
-                onClickPostQuestion={this.onClickPostQuestion}
-              />
+              <Bar>
+                <Button onClick={this.onClickPostQuestion}>New Post</Button>
+                {this.state.filterTopic && (
+                  <div className="d-flex align-items-center">
+                    <H2 className="mb-0 ml-2 mr-2">{this.state.filterTopic}</H2>
+                    <Button
+                      size="small"
+                      type="secondary"
+                      onClick={() => this.setState({ filterTopic: null })}
+                    >
+                      Clear
+                    </Button>
+                  </div>
+                )}
+              </Bar>
             )}
-            {postItems}
+            {postItems.length > 0 ? (
+              postItems
+            ) : (
+              <H2 className="mb-0">No posts found</H2>
+            )}
           </PostsContainer>
-          <SideBar className="d-flex col-sm-0 col-md-4">
-            <div style={{}}>
+          <SideBar id="feed-sidebar" className="d-flex col-sm-0 col-md-4">
+            <div>
               <DiscoverSection
+                activeItem={this.state.filterTopic}
                 items={itemsList}
-                // onItemClick={item => this.itemClick(item, 'popular')}
+                onItemClick={item => this.selectTopic(item)}
               />
             </div>
-            {/* <Tile className="mb-2">Computer Science</Tile>
-            <TileB className="mb-2">Computer Science</TileB>
-            <TileC className="mb-2">Computer Science</TileC>
-            <TileD className="mb-2">Computer Science</TileD> */}
           </SideBar>
         </div>
       </FeedPageContainer>
@@ -163,28 +170,4 @@ class FeedPage extends Component {
   }
 }
 
-function mapStateToProps({ feed, auth }) {
-  return {
-    posts: feed.posts,
-    loading: feed.loading,
-    loggedIn: auth.loggedIn,
-    user: auth.user
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    {
-      setPostDetail,
-      getPosts,
-      upvotePost,
-      clearUpvotePost
-    },
-    dispatch
-  );
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FeedPage);
+export default FeedPage;

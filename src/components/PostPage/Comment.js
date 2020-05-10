@@ -115,7 +115,6 @@ class Comment extends Component {
 
   renderAcceptAnswerModal() {
     if (this.state.showAcceptAnswerModal) {
-      console.log('comment accept', this.props);
       const commentAuthor = this.props.comment.author;
       const bounty = this.props.bountyValue.toFixed(2);
 
@@ -143,7 +142,7 @@ class Comment extends Component {
   }
 
   renderReportButton() {
-    const { author, text, _id } = this.props.comment;
+    const { author, _id } = this.props.comment;
 
     return (
       <div>
@@ -165,10 +164,6 @@ class Comment extends Component {
   }
 
   maybeRenderAcceptReply() {
-    const { comment, loggedInUser } = this.props;
-
-    // if (loggedInUser._id === comment.author._id) return;
-
     return (
       <CheckIcon
         active={this.props.accepted}
@@ -183,7 +178,6 @@ class Comment extends Component {
       <CommentWrapper key={_id}>
         <LeftWrapper>
           {this.maybeRenderAcceptReply()}
-
           {this.renderAcceptAnswerModal()}
           {this.renderCommentScoring(this.props.comment)}
           {this.renderReportButton()}

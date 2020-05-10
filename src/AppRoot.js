@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
 import TopBar from './containers/TopBar';
-import FeedPage from './components/FeedPage/FeedPage';
-import ReportPage from './components/ReportPage/ReportPage';
+import FeedPageContainer from './containers/FeedPageContainer';
 import PostPageContainer from './containers/PostPageContainer';
-import CreatePostPage from './containers/CreatePostPage';
+import NewPostPageContainer from './containers/NewPostPageContainer';
 import styles from './App.scss';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AboutPage from './containers/AboutPage';
@@ -23,6 +22,7 @@ import {
   faAngleUp,
   faAngleDown
 } from '@fortawesome/free-solid-svg-icons';
+import ReportPageContainer from './containers/ReportPageContainer';
 
 library.add(
   faCheckSquare,
@@ -46,9 +46,9 @@ class App extends Component {
               <Switch>
                 <Route path="/post/:id" component={PostPageContainer} />
                 <Route path="/profile/:id" component={ProfilePageContainer} />
-                <Route path="/post" component={CreatePostPage} />
-                <Route path="/reports" component={ReportPage} />
-                <Route exact path="/" component={FeedPage} />
+                <Route path="/post" component={NewPostPageContainer} />
+                <Route path="/reports" component={ReportPageContainer} />
+                <Route exact path="/" component={FeedPageContainer} />
                 {/* <Route exact path="/about" component={AboutPage} /> */}
                 <Route exact path="/about" component={AboutPage2} />
                 <Route exact path="/login" component={LoginPage} />
