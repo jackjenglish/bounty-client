@@ -26,7 +26,7 @@
     "eslint-plugin-react": "^7.17.0",
     "jasmine": "^3.5.0",
     "jasmine-enzyme": "^7.1.2",
-    "jsdom": "16.2.2",
+    "jsdom": "16.5.0",
     "jsdom-global": "3.0.2",
     "mocha": "^7.1.1",
     "node-sass": "^4.13.1",
